@@ -1,7 +1,7 @@
 import os
 import sys
 import unittest
-import faker.config
+# import faker.config
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,9 +24,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.forms",
-    # third party
     "rest_framework",
-    # apps
+    "app"
 ]
 
 MIDDLEWARE = [
@@ -69,10 +68,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "idaproject",
         "USER": "postgres",
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": "db",
+        "HOST": "127.0.0.1",
         "PORT": 5432,
         "CONN_MAX_AGE": 600,
     }
@@ -110,6 +109,8 @@ MEDIA_URL = "/m/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
 FILE_UPLOAD_PERMISSIONS = 0o644
+UPLOAD_TO = 'site_media'
+
 
 # Debug Toolbar
 def show_toolbar_callback(_):
@@ -117,8 +118,8 @@ def show_toolbar_callback(_):
 DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": "config.settings.show_toolbar_callback"}
 
 # Cache
-if not TESTING:
-    CACHES = {"default": {"BACKEND": "redis_cache.RedisCache", "LOCATION": "redis:6379"}}
+# if not TESTING:
+#     CACHES = {"default": {"BACKEND": "redis_cache.RedisCache", "LOCATION": "redis:6379"}}
 
 SITE_ID = 1
 
